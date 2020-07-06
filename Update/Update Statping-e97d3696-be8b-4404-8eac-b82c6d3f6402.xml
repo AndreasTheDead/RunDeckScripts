@@ -1,0 +1,59 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='StatpingDownloadURL' required='true'>
+          <label>Statping Download URL</label>
+        </option>
+      </options>
+    </context>
+    <defaultTab>nodes</defaultTab>
+    <description>Updates Statping on my Status Server.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Update</group>
+    <id>e97d3696-be8b-4404-8eac-b82c6d3f6402</id>
+    <loglevel>INFO</loglevel>
+    <name>Update Statping</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>Status</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Stop Statping</description>
+        <exec>sudo service statping stop</exec>
+      </command>
+      <command>
+        <description>Download Statping</description>
+        <exec>wget ${option.StatpingDownloadURL}</exec>
+      </command>
+      <command>
+        <description>Extract file</description>
+        <exec>tar -xzf statping-linux-x64.tar.gz</exec>
+      </command>
+      <command>
+        <description>Move to Programm Folder</description>
+        <exec>sudo mv statping /usr/local/bin/statping</exec>
+      </command>
+      <command>
+        <description>Delete Downloads</description>
+        <exec>rm statping*</exec>
+      </command>
+      <command>
+        <description>Start Statping</description>
+        <exec>sudo service statping start</exec>
+      </command>
+    </sequence>
+    <uuid>e97d3696-be8b-4404-8eac-b82c6d3f6402</uuid>
+  </job>
+</joblist>

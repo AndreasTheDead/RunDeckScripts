@@ -1,0 +1,61 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description><![CDATA[This Script will Test the Speed of the Internet Conection of a Server with the Offical Speedtest.net CLI tool.
+If the Programm is not isntalled it will be installed.]]></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Tests</group>
+    <id>33e39775-30c7-4d35-b3cb-45b287eb12b8</id>
+    <loglevel>INFO</loglevel>
+    <name>SpeedTest</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>.*</filter>
+      <filterExclude>localhost</filterExclude>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='parallel'>
+      <command>
+        <description>Check if it is installed if not Install it.</description>
+        <script><![CDATA[if [[ `which yum` ]]; then
+    if [[ -z `command -v speedtest` ]]; then
+        echo "Not installed. Installing Now."
+        sudo yum install wget -y
+        sudo wget https://bintray.com/ookla/rhel/rpm -O bintray-ookla-rhel.repo
+        sudo mv bintray-ookla-rhel.repo /etc/yum.repos.d/
+        sudo yum install speedtest -y
+    else
+    echo "Is installed, Proceding further"
+    fi
+    
+elif [[ `which apt` ]]; then
+    if [[ -z `command -v speedtest` ]]; then
+        echo "Not installed. Installing Now."
+        sudo apt-get install gnupg1 apt-transport-https dirmngr -y
+        export INSTALL_KEY=379CE192D401AB61
+        export DEB_DISTRO=$(lsb_release -sc)
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
+        echo "deb https://ookla.bintray.com/debian ${DEB_DISTRO} main" | sudo tee  /etc/apt/sources.list.d/speedtest.list
+        sudo apt-get update
+        sudo apt-get install speedtest -y
+        fi
+fi]]></script>
+        <scriptargs />
+      </command>
+      <command>
+        <description>run speedtest</description>
+        <exec>speedtest --accept-license --accept-gdpr</exec>
+      </command>
+    </sequence>
+    <uuid>33e39775-30c7-4d35-b3cb-45b287eb12b8</uuid>
+  </job>
+</joblist>

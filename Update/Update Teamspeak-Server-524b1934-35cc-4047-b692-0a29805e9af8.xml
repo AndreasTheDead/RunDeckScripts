@@ -1,0 +1,59 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='TeamspeakServerDownloadURL' required='true'>
+          <label>TS-Server URL</label>
+        </option>
+        <option name='TeamspeakServerPath' required='true' value='/_industria/teamspeak/'>
+          <label>Teamspeak-Server Path</label>
+        </option>
+        <option name='TeamspeakServiceName' required='true' value='ts3-server' />
+      </options>
+    </context>
+    <defaultTab>nodes</defaultTab>
+    <description>A Script to Update my Teamspeak Server to a current version.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Update</group>
+    <id>524b1934-35cc-4047-b692-0a29805e9af8</id>
+    <loglevel>INFO</loglevel>
+    <name>Update Teamspeak-Server</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>Main</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Stop Teamspeak Server</description>
+        <exec>sudo service ${option.TeamspeakServiceName} stop</exec>
+      </command>
+      <command>
+        <description>Download Teamspeak-Server</description>
+        <exec>curl -o ${option.TeamspeakServerPath}/teamspeak3-server_linux_amd64.tar.bz2 ${option.TeamspeakServerDownloadURL}</exec>
+      </command>
+      <command>
+        <description>Extract file</description>
+        <exec>sudo tar -xjf ${option.TeamspeakServerPath}teamspeak3-server_linux_amd64.tar.bz2 -C ${option.TeamspeakServerPath} --strip-components=1</exec>
+      </command>
+      <command>
+        <description>Delete Download</description>
+        <exec>rm ${option.TeamspeakServerPath}teamspeak3-server_linux_amd64.tar.bz2</exec>
+      </command>
+      <command>
+        <description>Start TeamspeakServer</description>
+        <exec>sudo service ${option.TeamspeakServiceName} start</exec>
+      </command>
+    </sequence>
+    <uuid>524b1934-35cc-4047-b692-0a29805e9af8</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,40 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='ip' required='true'>
+          <label>IP</label>
+        </option>
+      </options>
+    </context>
+    <defaultTab>nodes</defaultTab>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <excludeFilterUncheck>true</excludeFilterUncheck>
+    <executionEnabled>true</executionEnabled>
+    <group>ProblemSolving</group>
+    <id>cc2bbe4e-63cf-467d-9b0c-c2c4c2699489</id>
+    <loglevel>INFO</loglevel>
+    <name>Unban IP from SSH</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>.*</filter>
+      <filterExclude>localhost IPA</filterExclude>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>sudo fail2ban-client set sshd unbanip ${option.ip}</exec>
+      </command>
+    </sequence>
+    <uuid>cc2bbe4e-63cf-467d-9b0c-c2c4c2699489</uuid>
+  </job>
+</joblist>

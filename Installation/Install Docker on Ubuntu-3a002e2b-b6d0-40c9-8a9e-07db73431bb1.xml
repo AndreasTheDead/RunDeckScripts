@@ -1,0 +1,65 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description>Install Docker on Ubuntu</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <excludeFilterUncheck>true</excludeFilterUncheck>
+    <executionEnabled>false</executionEnabled>
+    <group>Installation</group>
+    <id>3a002e2b-b6d0-40c9-8a9e-07db73431bb1</id>
+    <loglevel>INFO</loglevel>
+    <name>Install Docker on Ubuntu</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>.*</filter>
+      <filterExclude>localhost</filterExclude>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Uninstall Old versions</description>
+        <exec>sudo apt-get remove docker docker-engine docker.io containerd runc</exec>
+      </command>
+      <command>
+        <description>APT Update</description>
+        <exec>sudo apt-get update</exec>
+      </command>
+      <command>
+        <description>Install dependencies</description>
+        <exec>sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y</exec>
+      </command>
+      <command>
+        <description>Add Docker’s GPG key</description>
+        <exec>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</exec>
+      </command>
+      <command>
+        <description>Verify fingerprint</description>
+        <exec>sudo apt-key fingerprint 0EBFCD88</exec>
+      </command>
+      <command>
+        <script><![CDATA[sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"]]></script>
+        <scriptargs />
+      </command>
+      <command>
+        <description>Apt Update</description>
+        <exec>sudo apt-get update</exec>
+      </command>
+      <command>
+        <description>Install Docker</description>
+        <exec>sudo apt-get install docker-ce docker-ce-cli containerd.io -y</exec>
+      </command>
+    </sequence>
+    <uuid>3a002e2b-b6d0-40c9-8a9e-07db73431bb1</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,32 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description>test connectivity to the Servers</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Tests</group>
+    <id>8723143e-93bc-4a50-872b-8625e7a6a56b</id>
+    <loglevel>INFO</loglevel>
+    <name>Test Connectivity</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>.*</filter>
+      <filterExclude>localhost</filterExclude>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='parallel'>
+      <command>
+        <exec>echo Conection to ${node.hostname} completet.</exec>
+      </command>
+    </sequence>
+    <uuid>8723143e-93bc-4a50-872b-8625e7a6a56b</uuid>
+  </job>
+</joblist>
