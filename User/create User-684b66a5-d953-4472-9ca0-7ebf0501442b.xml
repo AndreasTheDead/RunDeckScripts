@@ -1,0 +1,63 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='Username' required='true'>
+          <description>Set a Username</description>
+        </option>
+        <option name='Groups'>
+          <description><![CDATA[Adds user to Groups.
+e.g. sudo,docker]]></description>
+        </option>
+        <option name='Password'>
+          <description>Sets Passwords.</description>
+        </option>
+        <option name='SSH-Key'>
+          <description>Add a SSH-Public-Key to the User.</description>
+        </option>
+      </options>
+    </context>
+    <defaultTab>nodes</defaultTab>
+    <description>Creates a User</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <excludeFilterUncheck>true</excludeFilterUncheck>
+    <executionEnabled>true</executionEnabled>
+    <group>User</group>
+    <id>684b66a5-d953-4472-9ca0-7ebf0501442b</id>
+    <loglevel>INFO</loglevel>
+    <name>create User</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>.*</filter>
+      <filterExclude> management.industria.wtf</filterExclude>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Creating New User</description>
+        <exec>sudo useradd -s /bin/bash -d /home/${option.Username} -m -G ${option.Groups} ${option.Username}</exec>
+      </command>
+      <command>
+        <description>Sets Password </description>
+        <exec>echo "${option.Username}:${option.Password}" | chpasswd</exec>
+      </command>
+      <command>
+        <description>Added Public Key</description>
+        <script><![CDATA[sudo mkdir /home/@option.Username@/.ssh/
+sudo chmod 0700 /home/@option.Username@/.ssh/
+sudo -- sh -c "echo '@option.SSH-Key@' > /home/@option.Username@/.ssh/authorized_keys"
+sudo chown -R @option.Username@:@option.Username@ /home/@option.Username@/.ssh/]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>684b66a5-d953-4472-9ca0-7ebf0501442b</uuid>
+  </job>
+</joblist>
