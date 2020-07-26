@@ -1,0 +1,31 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>b6f58242-01af-4080-a806-815ca5775bf6</id>
+    <loglevel>INFO</loglevel>
+    <name>Copy Nagios Plugins</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>Docker.industria.wtf, Games.industria.wtf, Management.industria.wtf, Status.industria.wtf</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Copy</description>
+        <exec>cp -r /mnt/public/nagios_checks/ /usr/lib/nagios/plugins/</exec>
+      </command>
+    </sequence>
+    <uuid>b6f58242-01af-4080-a806-815ca5775bf6</uuid>
+  </job>
+</joblist>
