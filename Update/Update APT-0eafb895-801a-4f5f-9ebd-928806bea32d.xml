@@ -1,0 +1,36 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Update</group>
+    <id>0eafb895-801a-4f5f-9ebd-928806bea32d</id>
+    <loglevel>INFO</loglevel>
+    <name>Update APT</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>Docker.industria.wtf, Games.industria.wtf, Management.industria.wtf, Status.industria.wtf, Storage.industria.wtf</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>apt Update</description>
+        <exec>sudo apt update</exec>
+      </command>
+      <command>
+        <description>Apt List</description>
+        <exec>sudo apt list --upgradable</exec>
+      </command>
+    </sequence>
+    <uuid>0eafb895-801a-4f5f-9ebd-928806bea32d</uuid>
+  </job>
+</joblist>
