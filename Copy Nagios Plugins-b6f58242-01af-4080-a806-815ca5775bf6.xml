@@ -23,7 +23,7 @@
     <sequence keepgoing='false' strategy='node-first'>
       <command>
         <description>Copy</description>
-        <exec>cp -r /mnt/public/nagios_checks/ /usr/lib/nagios/plugins/</exec>
+        <exec>sudo cp -rf /mnt/public/nagios_checks/* /usr/lib/nagios/plugins/</exec>
       </command>
     </sequence>
     <uuid>b6f58242-01af-4080-a806-815ca5775bf6</uuid>
